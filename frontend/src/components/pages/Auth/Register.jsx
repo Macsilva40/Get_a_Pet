@@ -38,7 +38,7 @@ function Register() {
                     text="Telefone"
                     type="text"
                     name="phone"
-                    placeholder="Digite o seu telefone 2"
+                    placeholder="Digite o seu telefone"
                     handleOnChange={handleChange}
                 />
                 <Input
