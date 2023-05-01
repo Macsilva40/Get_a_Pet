@@ -3,6 +3,8 @@
     margin: 0 auto;
     background-color: #fff;
     border-radius: 15px;
+    text-align: center;
+
 }
 
 .form_container input[type='submit'] {
@@ -35,7 +37,7 @@
 .preview_pet_images {
     display: flex;
     justify-content: center;
-    margin-bottom: 1em;
+    margin: 1em;
 }
 
 .preview_pet_images img {
