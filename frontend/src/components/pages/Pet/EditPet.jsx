@@ -26,7 +26,39 @@ function EditPet() {
 
     }, [token])
 
-    async function updatePet(pet) { }
+    async function updatePet(pet) {
+
+        let msgType = 'success'
+
+        const formData = new FormData()
+
+        await Object.keys(pet).forEach((key) => {
+
+            if (key === 'images') {
+                for (let i = 0; i < pet[key].length; i++) {
+                    formData.append('images', pet[key][i])
+                }
+            } else {
+                formData.append(key, pet[key])
+            }
+
+        })
+        const data = await api.patch(`pets/${pet._id}`, formData, {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+            .then((response) => {
+                return response.data
+            })
+            .catch((err) => {
+                msgType = 'error'
+                return err.response.data
+            })
+
+        setFlashMessage(data.message, msgType)
+    }
 
     return (
         <section>
@@ -35,7 +67,7 @@ function EditPet() {
                 <p>Depois da edição os dados serão atualizados no sistema</p>
             </div>
             {pet.name && (
-                <PetForm handleSubmit={updatePet} btn="Atualizar" petData={pet} />
+                <PetForm handleSubmit={updatePet} btnText="Atualizar" petData={pet} />
             )}
         </section>
     )
